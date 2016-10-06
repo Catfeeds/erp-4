@@ -1,0 +1,108 @@
+@extends('frontend.layouts.master')
+
+@section('content')
+
+<div class="content">   
+    <ul class="nav nav-tabs">
+    @if(Access::can('manager'))
+    <li class="active"><a href="#part" data-toggle="tab">零件</a></li>
+    <li><a href="#subassembly" data-toggle="tab">组件</a></li>
+    <li><a href="#product" data-toggle="tab">成品</a></li>
+    @else
+    <li class="active"><a href="#subassembly" data-toggle="tab">组件</a></li>
+    <li><a href="#product" data-toggle="tab">成品</a></li>
+    @endif
+  </ul>
+  <div class="tab-content">
+  @if(Access::can('manager'))
+    <div class="tab-pane active" id="part">
+      @foreach($parts as $content)
+        @if ($content->total == 0)
+          <div class="btn btn-warning"  data-toggle="modal" data-target="#{{$content->id}}" style="margin:5px 0 0 0"> <img class="img-rounded img-responsive" src="{{ $content->hasOnePicture['logo'] }}" alt="Product image">      
+            <h4 class="text-center" style="margin:2px">{{ $content->total }}<small>{{ $content->unit }}</small></h4>            
+            <h5 class="text-center" style="margin:2px ; color:#428bca"><b>{{ $content->name }}</b></h5>
+          </div>
+        @else
+          <div class="btn btn-success" style="margin:5px 0 0 0"> <img class="img-rounded" src="{{ $content->hasOnePicture['logo'] }}" alt="Product image">      
+            <h4 class="text-center" style="margin:2px">{{ $content->total }}<small>{{ $content->unit }}</small></h4>            
+            <h5 class="text-center" style="margin:2px ; color:#428bca">{{ $content->name }}</h5>
+          </div>
+        @endif
+      @endforeach
+    </div>
+    @endif
+    @if(Access::can('manager'))
+    <div class="tab-pane" id="subassembly">
+    @else
+    <div class="tab-pane  active" id="subassembly">
+    @endif
+      @foreach($subassemblys as $content)
+        @if ($content->total == 0)
+          <div class="btn btn-warning" style="margin:5px 0 0 0"> <img class="img-rounded" src="{{ $content->hasOnePicture['logo'] }}" alt="Product image">      
+            <h4 class="text-center" style="margin:2px">{{ $content->total }}<small>{{ $content->unit }}</small></h4>          
+            <h5 class="text-center" style="margin:2px ; color:#428bca">{{ $content->name }}</h5>
+          </div>
+        @else
+          <div class="btn btn-success" style="margin:5px 0 0 0"> <img class="img-rounded" src="{{ $content->hasOnePicture['logo'] }}" alt="Product image">      
+            <h4 class="text-center" style="margin:2px">{{ $content->total }}<small>{{ $content->unit }}</small></h4>          
+            <h5 class="text-center" style="margin:2px ; color:#428bca">{{ $content->name }}</h5>
+          </div>
+        @endif
+      @endforeach
+    </div>
+    <div class="tab-pane " id="product">
+      @foreach($products as $content)
+        @if ($content->total == 0)
+          <div class="btn btn-warning" style="margin:5px 0 0 0"> <img class="img-rounded" src="{{ $content->hasOnePicture['logo'] }}" alt="Product image">      
+            <h4 class="text-center" style="margin:2px">{{ $content->total }}<small>{{ $content->unit }}</small></h4>          
+            <h5 class="text-center" style="margin:2px ; color:#428bca">{{ $content->name }}</h5>
+          </div>
+        @else
+          <div class="btn btn-success" style="margin:5px 0 0 0"> <img class="img-rounded" src="{{ $content->hasOnePicture['logo'] }}" alt="Product image">      
+            <h4 class="text-center" style="margin:2px">{{ $content->total }}<small>{{ $content->unit }}</small></h4>          
+            <h5 class="text-center" style="margin:2px ; color:#428bca">{{ $content->name }}</h5>
+          </div>
+        @endif
+      @endforeach
+    </div>
+    <div class="tab-pane" id="tab3">
+      <h3>日程安排</h3>
+    </div>
+<h1 id="ok">hello</h1>
+    <!-- Modal -->
+    <div id="alertModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>消息提示</h3>
+      </div>
+      <div class="modal-body">
+        <p>提示内容</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">我知道了</button>
+      </div>
+    </div>
+</div>
+@endsection
+
+@section('after-scripts-end')
+<script>
+   $(function () { $('#alertModal').modal('hide')})});
+</script>
+<script>
+   $(function () { $('#ok').on('hide.bs.modal', function () {
+      alert('嘿，我听说您喜欢模态框...');})
+   });
+</script>
+  <script> 
+  $(document).ready(function(){
+    $(".btn").click(function(){
+      $i
+    alert('ok');
+  });
+});
+    alertModal = $('#alertModal'),attributeModal =  $("#attributeModal");
+    alertModal.find(".modal-body").html(messages);
+    alertModal.modal('toggle');
+  </script>
+@stop
