@@ -2,7 +2,7 @@
 
 @section('page-header')
     <h1>
-        仪表盘AA
+        仪表盘
         <small>{{ trans('strings.backend.dashboard_title') }}</small>
     </h1>
 @endsection
